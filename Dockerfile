@@ -45,7 +45,8 @@ RUN R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
 # Install python3 packages
 RUN pip install git+https://github.com/theislab/scanpy.git && \
     pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot \
-                openpyxl scvi cellxgene skggm pyannotables && \
+                openpyxl scvi cellxgene skggm pyannotables \
+                papermill && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
