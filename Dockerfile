@@ -38,7 +38,7 @@ RUN conda install --quiet --yes -c bioconda \
 # Install R packages
 RUN R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
  && R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq"))' \
- && R -e 'install.packages(c("qgraph"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("bootnet"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
 
