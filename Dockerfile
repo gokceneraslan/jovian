@@ -22,6 +22,8 @@ RUN conda install --quiet --yes -c bioconda \
     'python-igraph=0.7*' \
     leidenalg \
     louvain \
+    phantomjs \
+    hvplot \
     'r-base=3.6.1' \
     'r-devtools=2.2*' \
     'r-irkernel=1.0*' \
