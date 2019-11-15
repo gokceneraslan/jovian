@@ -24,6 +24,7 @@ RUN conda install --quiet --yes -c bioconda \
     louvain \
     phantomjs \
     hvplot \
+    selenium \
     'r-base=3.6.1' \
     'r-devtools=2.2*' \
     'r-irkernel=1.0*' \
