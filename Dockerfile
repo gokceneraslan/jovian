@@ -62,7 +62,7 @@ USER root
 
 # install arbitrary Ubuntu packages here to speed things up
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends htop vim && \
+    apt-get install -y --no-install-recommends htop vim aria2 && \
     rm -rf /var/lib/apt/lists/*
 
 # Configure container startup
