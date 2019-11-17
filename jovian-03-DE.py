@@ -277,6 +277,7 @@ sc.pl.umap(adata, color=['predicted_cell_types_coarse',
                          'predicted_cell_types'], ncols=1, legend_loc='on data', legend_fontsize=7, legend_fontweight='normal', legend_fontoutline=2);
 
 # %%
+# %%time
 sc.tl.draw_graph(adata)
 
 # %%
