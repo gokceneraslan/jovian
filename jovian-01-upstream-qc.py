@@ -57,7 +57,7 @@ sc.settings.verbosity = 'hint'
 # %% [markdown]
 # ## Parameters
 
-# %% tags=["parameters"]
+# %% {"tags": ["parameters"]}
 par_species = 'human' # mouse or human
 par_data_dir = 'data'
 

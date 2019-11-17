@@ -70,7 +70,7 @@ with shelve.open('session.pkl', protocol=4, writeback=False) as db:
 # %% [markdown]
 # ## Parameters
 
-# %% tags=["parameters"]
+# %% {"tags": ["parameters"]}
 par_cutoff_min_counts = 200
 par_cutoff_min_genes  = 200
 par_cutoff_max_genes  = None
