@@ -118,17 +118,35 @@ sc.pl.rank_genes_groups(adata, n_genes=30, ncols=6, fontsize=7, sharey=False)
 # ## Cell typing
 
 # %%
-def predict_cell_types(adata, use_raw=True, species='mouse', cluster_key='leiden', numCores=1, **kwds):
-
-    if species == 'mouse':
-        ref_names = ['MouseRNAseqData','ImmGenData']
-    else:
-        ref_names = ['HumanPrimaryCellAtlasData', 'MonacoImmuneData']
+def predict_cell_types(adata,
+                       use_raw=True,
+                       species='mouse',
+                       ref_name=None,
+                       ref_label_column='label.fine',
+                       cluster_key='leiden',
+                       obs_out_key='predicted_cell_types',
+                       uns_out_key='cell_type_prediction',
+                       numCores=1,
+                       **kwds):
 
     s = importr('SingleR')
-    refs = [s.__dict__[ref_name]() for ref_name in ref_names]
-    ref_genes = StrVector(set.intersection(*[set(r['rownames'](d)) for d in refs]))
-    ref = r('cbind')(*[r('`[`')(d, ref_genes) for d in refs]) # merge references
+
+    if ref_name is None:
+        if species == 'mouse':
+            ref_names = ['MouseRNAseqData', 'ImmGenData']
+        else:
+            ref_names = ['HumanPrimaryCellAtlasData', 'MonacoImmuneData']
+
+        refs = [s.__dict__[ref_name]() for ref_name in ref_names]
+        ref_genes = StrVector(set.intersection(*[set(r['rownames'](d)) for d in refs]))
+        ref = r('cbind')(*[r('`[`')(d, ref_genes) for d in refs]) # merge references
+    else:
+        if isinstance(ref_name, str):
+            ref = r(f'scRNAseq::{ref_name}')()
+            ref = r('scater::logNormCounts')(ref)
+        else:
+            ref = ref_name
+        ref_genes = r['rownames'](ref)
 
     ad = adata.raw if use_raw else adata
     obs = adata.obs
@@ -151,22 +169,24 @@ def predict_cell_types(adata, use_raw=True, species='mouse', cluster_key='leiden
 
     if numCores > 1:
         par = r('BiocParallel::MulticoreParam')(workers = numCores)
-        kwds['BPPARAM'] = par
+    else:
+        par = r('BiocParallel::SerialParam')()
+
+    kwds['BPPARAM'] = par
 
     labels = s.SingleR(test=mat,
                        ref=ref,
-                       labels = r('`$`')(ref, 'label.fine'), # use label.main too
+                       labels=r('`$`')(ref, ref_label_column), # use label.main too
                        method='cluster',
                        clusters=clusters, **kwds)
 
     labels = pandas2ri.rpy2py(r('as.data.frame')(labels))
 
-    adata.obs['predicted_cell_types'] = ''
+    adata.obs[obs_out_key] = ''
     for cluster in adata.obs[cluster_key].cat.categories:
-        adata.obs.loc[adata.obs[cluster_key] == cluster, 'predicted_cell_types'] = labels.loc[cluster]['pruned.labels']
+        adata.obs.loc[adata.obs[cluster_key] == cluster, obs_out_key] = labels.loc[cluster]['pruned.labels']
 
-    adata.uns['cell_type_prediction'] = labels['pruned.labels'].to_dict()
-
+    adata.uns[uns_out_key] = labels['pruned.labels'].to_dict()
 
 # %% [markdown]
 # ## Save markers
