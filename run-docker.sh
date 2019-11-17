@@ -1,6 +1,6 @@
 #!/bin/bash -ie
 
-pushd data
+pushd example-data
 ./download.sh
 popd
 
