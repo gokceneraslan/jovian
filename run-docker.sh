@@ -4,11 +4,11 @@ pushd example-data
 ./download.sh
 popd
 
-output_folder='output_notebooks'
-input_folder='input_notebooks'
-reports_folder='reports'
+output_folder='outputs/notebooks'
+input_folder='inputs/notebooks'
+reports_folder='outputs/reports'
 
-mkdir $output_folder $input_folder $reports_folder
+mkdir -p $output_folder $input_folder $reports_folder
 
 for pyfile in jovian-01-upstream-qc.py jovian-02a-downstream-qc.py jovian-02b-downstream-integrated.py jovian-03-DE.py; do
     ipynbfile=${pyfile/.py/.ipynb}

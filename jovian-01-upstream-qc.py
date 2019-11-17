@@ -53,6 +53,8 @@ import shelve
 
 # %%
 sc.settings.verbosity = 'hint'
+plt.rcParams['figure.dpi'] = 150
+
 
 # %% [markdown]
 # ## Parameters

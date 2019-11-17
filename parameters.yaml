@@ -29,11 +29,11 @@ par_downstream_n_pcs: 50
 par_downstream_n_neighbors: 15
 par_downstream_louvain_resolution: 1.5
 par_downstream_neighbor_metric: 'euclidean'
-par_save_filename_sample: 'adata-sample-%s.h5ad'
+par_save_filename_sample: 'outputs/anndata/adata-sample-%s.h5ad'
 
 ## 02B
-par_save_filename: 'adata.h5ad'
-par_save_filename_group: 'adata-group-%s.h5ad'
+par_save_filename: 'outputs/anndata/adata.h5ad'
+par_save_filename_group: 'outputs/anndata/adata-group-%s.h5ad'
 par_remove_doublets: True
 par_generate_plots_per_group: True
 par_group_key: 'tissue'
