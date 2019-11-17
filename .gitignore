@@ -1,0 +1,4 @@
+*.ipynb
+input_notebooks
+output_notebooks
+.*
