@@ -68,7 +68,7 @@ del conf_samples, conf_samples_processed
 # %% [markdown]
 # ## Parameters
 
-# %%
+# %% tags=["parameters"]
 par_de_group = 'leiden'
 par_de_n_genes = 2000
 par_de_method = 't-test_overestim_var'

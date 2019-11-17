@@ -67,7 +67,7 @@ adata
 adata.var_names.str.startswith('Mir').sum()
 
 # %% [markdown]
-# ## Transfer manual annotations 
+# ## Transfer manual annotations
 
 # %%
 labels = []
@@ -120,7 +120,7 @@ sc.pl.dotplot(adata, var_names=adata.var_names[adata.var_names.str.startswith('M
 sc.pl.umap(adata, color=['Mir9-3hg', 'Mir703', 'Mir142hg'], cmap='Reds', ncols=5, vmax='p95')
 
 # %%
-sc.pl.umap(adata, color=['Mir124-2hg', 'Mir124a-1hg', '2900055J20Rik', 'Snhg11', 'Syt1', 
+sc.pl.umap(adata, color=['Mir124-2hg', 'Mir124a-1hg', '2900055J20Rik', 'Snhg11', 'Syt1',
                          'Gabra1', 'Cx3cl1', 'Slc12a5', 'Slc17a7', 'Adcy1'], cmap='Reds', ncols=5, vmax='p95')
 
 # %%
@@ -165,7 +165,7 @@ adata
 
 # %%
 important_markers = sorted(set(list('''
-C1qc Sirt2 Meg3 Pdgfra Gfap Cldn5 C1qb Cnp Gad1 Pcp4 Olig1 Slc1a3 Vwa1 C1qa Mbp Nap1l5 Syt1 Pllp Gstm1 Ctla2a Ctss 
+C1qc Sirt2 Meg3 Pdgfra Gfap Cldn5 C1qb Cnp Gad1 Pcp4 Olig1 Slc1a3 Vwa1 C1qa Mbp Nap1l5 Syt1 Pllp Gstm1 Ctla2a Ctss
 Slc17a7 Htra1 Sparc Hexb Grin2b Atp1a2 Fcer1g Neurod2 Tyrobp Neurod6 Fcrls Satb2 Fezf2
 '''.split())))
 
@@ -221,11 +221,11 @@ for group in (1, 7, 21):
     ad = sc.read(f'adata-{group}-velocyto.h5ad')
     ad.obs.leiden = ad.obs.leiden.astype(str)
     labels.leiden = labels.leiden.astype(str)
-    
+
     del ad.obs['Cell type']
     del ad.obs['postnatal_age_y']
     del ad.obs['postnatal_age_x']
-    
+
     ad.obs = ad.obs.merge(labels[labels.postnatal_age == group], how='left', on=['leiden']).set_index(ad.obs.index)
     display(ad.obs.head())
     ad.write(f'adata-{group}-velocyto.h5ad')
@@ -246,7 +246,7 @@ if per_group_velocyto:
         ad = sc.read(f'adata-{group}-velocyto.h5ad')
         ad.obs = ad.obs.merge(labels[labels.postnatal_age == group], how='left', on='leiden').set_index(ad.obs.index)
         sc.pl.umap(ad, color='Cell type')
-        
+
         ad.X = ad.layers['count']
         scv.pp.filter_and_normalize(ad)
 
@@ -258,9 +258,9 @@ if per_group_velocyto:
         scv.tl.velocity(ad)
         scv.tl.velocity_graph(ad)
         scv.tl.terminal_states(ad)
-        
+
         individual_ads[group] = ad
-        
+
         scv.pl.velocity_embedding_grid(ad, basis='umap', color='Cell type', scale=0.3, legend_loc='right margin', alpha=1, size=1)
         sc.pl.umap(ad, color=['root_cells', 'end_points'], cmap='RdYlBu')
         #scv.pl.velocity(ad, var_names='Fezf2')

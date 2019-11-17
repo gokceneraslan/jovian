@@ -62,7 +62,7 @@ sc.settings.verbosity = 'hint'
 # %% [markdown]
 # ## Parameters
 
-# %%
+# %% tags=["parameters"]
 par_save_filename = 'adata.h5ad'
 par_save_filename_group = 'adata-group-%s.h5ad'
 

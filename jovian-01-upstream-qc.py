@@ -57,7 +57,7 @@ sc.settings.verbosity = 'hint'
 # %% [markdown]
 # ## Parameters
 
-# %%
+# %% tags=["parameters"]
 par_species = 'human' # mouse or human
 par_data_dir = 'data'
 
@@ -73,7 +73,7 @@ par_empty_drops_fdr_cutoff = 0.01
 par_empty_drops_retain = 800
 
 # %%
-par_mt_prefix = 'MT-' if par_species == 'human' else 'mt-'
+conf_mt_prefix = 'MT-' if par_species == 'human' else 'mt-'
 
 # %% [markdown]
 # ***
@@ -202,7 +202,7 @@ for sample in tqdm(list(conf_sample_sheet.itertuples())):
     ad.obs['barcode_rank'] = scipy.stats.rankdata(-ad.obs['n_umis'])
 
     # MT
-    mt_gene_mask = ad.var_names.str.startswith(par_mt_prefix)
+    mt_gene_mask = ad.var_names.str.startswith(conf_mt_prefix)
     assert mt_gene_mask.sum() > 0, 'Wrong mt prefix'
     ad.obs['mt_frac'] = ad.X[:, mt_gene_mask].sum(1).A1 / ad.obs['n_umis']
 

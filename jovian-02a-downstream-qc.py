@@ -70,7 +70,7 @@ with shelve.open('session.pkl', protocol=4, writeback=False) as db:
 # %% [markdown]
 # ## Parameters
 
-# %%
+# %% tags=["parameters"]
 par_cutoff_min_counts = 200
 par_cutoff_min_genes  = 200
 par_cutoff_max_genes  = None
@@ -164,7 +164,7 @@ plt.subplots_adjust(wspace=0.6, hspace=0.4)
 # %%
 if par_remove_mito_genes:
     for adata in tqdm(list(conf_samples.values())):
-        adata._inplace_subset_var(~adata.var_names.str.startswith(par_mt_prefix))
+        adata._inplace_subset_var(~adata.var_names.str.startswith(conf_mt_prefix))
         display(adata)
 
 # %%
