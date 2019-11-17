@@ -1,6 +1,8 @@
 #!/bin/bash -ie
 
+pushd data
 ./download.sh
+popd
 
 output_folder='output_notebooks'
 mkdir $output_folder

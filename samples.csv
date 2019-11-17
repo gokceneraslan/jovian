@@ -1,4 +1,0 @@
-h5ad_or_h5_path,sample_name,raw,tissue,chemistry,age
-data/heart_10k_v3_raw_feature_bc_matrix.h5,mouse_heart,True,heart,v3,e18
-data/neuron_10k_v3_raw_feature_bc_matrix.h5,mouse_brain_10k,True,brain,v3,e18
-data/neuron_9k_raw_gene_bc_matrices_h5.h5,mouse_brain_9k,True,brain,v2,e18
