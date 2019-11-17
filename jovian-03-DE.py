@@ -126,7 +126,6 @@ def predict_cell_types(adata,
                        cluster_key='leiden',
                        obs_out_key='predicted_cell_types',
                        uns_out_key='cell_type_prediction',
-                       numCores=1,
                        **kwds):
 
     s = importr('SingleR')
@@ -167,13 +166,6 @@ def predict_cell_types(adata,
     mat = r("`colnames<-`")(mat, ro.vectors.StrVector(obs.index)) # TODO: really needed?
     clusters = ro.vectors.StrVector(obs[cluster_key].values.tolist())
 
-    if numCores > 1:
-        par = r('BiocParallel::MulticoreParam')(workers = numCores)
-    else:
-        par = r('BiocParallel::SerialParam')()
-
-    kwds['BPPARAM'] = par
-
     labels = s.SingleR(test=mat,
                        ref=ref,
                        labels=r('`$`')(ref, ref_label_column), # use label.main too
@@ -194,6 +186,7 @@ def predict_cell_types(adata,
 # %%
 def save_markers(adata, filename, group_key='leiden'):
 
+    Path(filename).parent.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(filename) as writer:
 
         for cluster in tqdm(adata.obs[group_key].cat.categories):
@@ -213,9 +206,8 @@ def save_markers(adata, filename, group_key='leiden'):
                                                      '?': '_'}))
                 sheet_name = f'{cluster} ({pred})'
             else:
-                sheet_name = cluster
-            marker_df.to_excel(writer, sheet_name=sheet_name, index=False)
-
+                sheet_name = f'Cluster {cluster}'
+            marker_df.to_excel(writer, sheet_name=sheet_name[:31], index=False)
 
 # %%
 save_markers(adata, par_save_filename_de)

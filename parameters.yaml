@@ -46,5 +46,5 @@ par_de_n_genes: 2000
 par_de_method: 't-test_overestim_var'
 par_per_group_de: True
 par_group_key: 'tissue'
-par_save_filename_de: 'de-genes.xlsx'
-par_save_filename_de_group: 'de-genes-%s.xlsx'
+par_save_filename_de: 'outputs/reports/de-genes.xlsx'
+par_save_filename_de_group: 'outputs/reports/de-genes-%s.xlsx'
