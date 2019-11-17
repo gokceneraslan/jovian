@@ -1,6 +1,6 @@
 # 01
-par_species: 'human' # mouse or human
-par_data_dir: 'data'
+par_species: 'mouse' # mouse or human
+par_data_dir: 'example-data'
 par_initial_umi_cutoff: 10
 par_initial_gene_cutoff: 10
 
