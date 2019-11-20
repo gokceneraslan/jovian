@@ -128,6 +128,7 @@ def predict_cell_types(adata,
                        uns_out_key='cell_type_prediction',
                        **kwds):
 
+    r('BiocParallel::register(BiocParallel::SerialParam())')
     s = importr('SingleR')
 
     if ref_name is None:
@@ -166,11 +167,12 @@ def predict_cell_types(adata,
     mat = r("`colnames<-`")(mat, ro.vectors.StrVector(obs.index)) # TODO: really needed?
     clusters = ro.vectors.StrVector(obs[cluster_key].values.tolist())
 
+    par = r('BiocParallel::SerialParam')()
     labels = s.SingleR(test=mat,
                        ref=ref,
                        labels=r('`$`')(ref, ref_label_column), # use label.main too
                        method='cluster',
-                       clusters=clusters, **kwds)
+                       clusters=clusters, BPPARAM=par, **kwds)
 
     labels = pandas2ri.rpy2py(r('as.data.frame')(labels))
 
