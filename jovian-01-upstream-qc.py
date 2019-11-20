@@ -107,7 +107,8 @@ assert conf_sample_sheet.sample_name.nunique() == conf_n_samples, 'Sample sheet 
 # ## Tools for prefiltered data
 
 # %%
-def emptydrops(adata, lower, niters, ignore, retain=None, **kwargs):
+def emptydrops(adata, lower, niters, ignore, retain=None, seed=0, **kwargs):
+    r('set.seed')(seed)
     du = importr('DropletUtils')
     ed = du.emptyDrops(adata.X.T,
                        lower=lower,
