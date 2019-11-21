@@ -109,7 +109,7 @@ for k, ad in tqdm(list(conf_samples.items())):
     if par_cutoff_min_counts: sc.pp.filter_cells(ad, min_counts=par_cutoff_min_counts)
     if par_final_empty_drops_fdr_cutoff: ad._inplace_subset_obs(ad.obs.empty_drops_FDR < par_final_empty_drops_fdr_cutoff)
     if par_mito_cutoff:
-        if par_mito_cutoff.endswith('_'):
+        if isinstance(par_mito_cutoff, str) and par_mito_cutoff.endswith('_'):
             ad._inplace_subset_obs(ad.obs.mt_frac < ad.obs[par_mito_cutoff])
         else:
             ad._inplace_subset_obs(ad.obs.mt_frac < par_mito_cutoff)
