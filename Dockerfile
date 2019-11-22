@@ -13,7 +13,7 @@ RUN apt-get update && \
 USER $NB_UID
 
 # Install R and python packages through conda-forge
-RUN conda install --quiet --yes -c bioconda \
+RUN conda install --quiet --yes -c bioconda -c pytorch \
     plotly \
     plotnine \
     seaborn \
@@ -36,7 +36,9 @@ RUN conda install --quiet --yes -c bioconda \
     'r-seurat=3.0.2' \
     'r-huge=1.3*' \
     'r-psych=1.8*' \
-    'rpy2=3.1*' && \
+    'rpy2=3.1*' \
+    pytorch=1.3* \
+    torchvision && \
     conda clean --all -f -y
 
 # Install R packages
@@ -52,6 +54,7 @@ RUN pip install git+https://github.com/theislab/scanpy.git && \
                 openpyxl scvi cellxgene skggm pyannotables \
                 papermill && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
+    pip install git+https://github.com/broadinstitute/CellBender.git && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
