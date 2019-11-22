@@ -37,7 +37,7 @@ par_save_filename_group: 'outputs/anndata/adata-group-%s.h5ad'
 par_remove_doublets: True
 par_generate_plots_per_group: True
 par_group_key: 'tissue'
-par_merge_type: 'inner'
+par_merge_type: 'outer'
 par_batch_key: 'sample_name'
 
 ## 03
