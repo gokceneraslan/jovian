@@ -37,7 +37,7 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
     'r-huge=1.3*' \
     'r-psych=1.8*' \
     'rpy2=3.1*' \
-    pytorch=1.3* \
+    pytorch=1.3* cpuonly \
     torchvision && \
     conda clean --all -f -y
 
