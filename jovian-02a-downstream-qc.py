@@ -148,7 +148,10 @@ for adata in tqdm(list(conf_samples.values())):
 conf_xist_gene_name = 'Xist' if par_species == 'mouse' else 'XIST'
 
 for adata in tqdm(list(conf_samples.values())):
-    adata.obs['predicted_sex'] = ['female' if x else 'male' for x in adata.obs_vector(conf_xist_gene_name) > 0]
+    if conf_xist_gene_name is in adata.var_names:
+        adata.obs['predicted_sex'] = ['female' if x else 'male' for x in adata.obs_vector(conf_xist_gene_name) > 0]
+    else:
+        adata.obs['predicted_sex'] = 'male'
 
 # %% [markdown]
 # ## Highest expression
