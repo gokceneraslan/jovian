@@ -114,6 +114,12 @@ for k, ad in tqdm(list(conf_samples.items())):
         else:
             ad._inplace_subset_obs(ad.obs.mt_frac < par_mito_cutoff)
 
+    # remove all-zero genes
+    if sp.issparse(ad.X):
+        ad._inplace_subset_var(ad.X.sum(0).A1 > 0)
+    else:
+        ad._inplace_subset_var(ad.X.sum(0) > 0)
+
     display(ad)
 
 # %% [markdown]
