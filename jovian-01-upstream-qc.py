@@ -116,7 +116,7 @@ def emptydrops(adata, lower, niters, ignore, retain=None, seed=0, **kwargs):
                        ignore=ignore,
                        retain=retain,
                        **kwargs)
-    fdr = ed.slots['listData'].rx2('FDR')
+    fdr = r('`[[`')(ed, 'FDR')
     adata.obs['empty_drops_FDR'] = fdr
 
     with warnings.catch_warnings():
