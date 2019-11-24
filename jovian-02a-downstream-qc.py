@@ -255,7 +255,7 @@ for sample, ad in tqdm(list(conf_samples.items())):
 
     sc.pp.highly_variable_genes(ad, n_top_genes=par_downstream_n_top_genes)
 
-    n_pcs = min(min(ad.n_obs, ad.n_vars), par_downstream_n_pcs)
+    n_pcs = min(min(ad.n_obs, ad.n_vars)-1, par_downstream_n_pcs)
     sc.pp.pca(ad, n_comps=n_pcs, svd_solver='arpack')
     sc.pp.neighbors(ad, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
     sc.tl.umap(ad)
