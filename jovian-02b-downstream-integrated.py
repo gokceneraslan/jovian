@@ -142,7 +142,8 @@ adata
 # %%time
 
 sc.pp.highly_variable_genes(adata, n_top_genes=par_downstream_n_top_genes)
-sc.pp.pca(adata, n_comps=par_downstream_n_pcs, svd_solver='arpack')
+n_pcs = min(min(adata.n_obs, adata.n_vars), par_downstream_n_pcs)
+sc.pp.pca(adata, n_comps=n_pcs, svd_solver='arpack')
 sc.pp.neighbors(adata, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
 sc.tl.umap(adata)
 sc.tl.leiden(adata, resolution=par_downstream_louvain_resolution)
@@ -243,7 +244,8 @@ if par_remove_doublets:
 
     adata = adata[~adata.obs.scrublet].copy()
 
-    sc.pp.pca(adata, n_comps=par_downstream_n_pcs, svd_solver='arpack')
+    n_pcs = min(min(adata.n_obs, adata.n_vars), par_downstream_n_pcs)
+    sc.pp.pca(adata, n_comps=n_pcs, svd_solver='arpack')
     sc.pp.neighbors(adata, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
     sc.tl.umap(adata)
     sc.tl.leiden(adata, resolution=par_downstream_louvain_resolution)
@@ -292,7 +294,8 @@ if par_generate_plots_per_group:
 
         sc.pp.highly_variable_genes(ad, n_top_genes=par_downstream_n_top_genes)
 
-        sc.pp.pca(ad, n_comps=par_downstream_n_pcs, svd_solver='arpack')
+        n_pcs = min(min(ad.n_obs, ad.n_vars), par_downstream_n_pcs)
+        sc.pp.pca(ad, n_comps=n_pcs, svd_solver='arpack')
         sc.pp.neighbors(ad, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
         sc.tl.umap(ad)
         sc.tl.leiden(ad, resolution=par_downstream_louvain_resolution)
