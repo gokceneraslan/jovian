@@ -170,7 +170,7 @@ for sample in tqdm(list(conf_sample_sheet.itertuples())):
     # Read 10X filtered file
     file_path = Path(file)
     filtered_h5_path = file_path.parent / file_path.name.replace('raw', 'filtered')
-    if filtered_h5_path.exists():
+    if filtered_h5_path.exists() and str(sample.raw).lower() == 'true':
         cell_barcodes = sc.read_10x_h5(filtered_h5_path).obs_names.values
         ad.obs['10x_cell_calling'] = False
         ad.obs.loc[cell_barcodes] = True
