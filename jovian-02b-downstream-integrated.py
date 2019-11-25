@@ -59,6 +59,11 @@ sc.settings.verbosity = 'hint'
 # %% [markdown]
 # ***
 
+# %%
+with shelve.open('session.pkl', protocol=4, writeback=False) as db:
+    for k in db.keys():
+        globals()[k] = db[k]
+
 # %% [markdown]
 # ## Parameters
 
@@ -79,11 +84,6 @@ par_batch_key = 'sample_name'
 
 # %% [markdown]
 # ## Load session
-
-# %%
-with shelve.open('session.pkl', protocol=4, writeback=False) as db:
-    for k in db.keys():
-        globals()[k] = db[k]
 
 # %%
 del conf_samples
