@@ -41,6 +41,8 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
     torchvision && \
     conda clean --all -f -y
 
+ENV TAR=/bin/tar
+
 # Install R packages
 RUN R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
  && R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST"))' \
