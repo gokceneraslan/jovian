@@ -44,8 +44,8 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
 ENV TAR=/bin/tar
 
 # Install R packages
-RUN R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST"))' \
+RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
+ && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
  && R -e 'install.packages(c("bootnet", "lme4"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
