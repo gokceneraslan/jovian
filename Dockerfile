@@ -20,6 +20,7 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
     'pytables=3.6*' \
     'numba=0.46*' \
     'python-igraph=0.7*' \
+    graph-tool \
     leidenalg \
     louvain \
     jupytext \
