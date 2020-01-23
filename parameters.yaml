@@ -25,6 +25,7 @@ par_regress_out_n_jobs: 1
 
 # downstream parameters
 par_downstream_n_top_genes: 2000
+par_downstream_hvg_batch_key: Null
 par_downstream_n_pcs: 50
 par_downstream_n_neighbors: 15
 par_downstream_louvain_resolution: 1.5
