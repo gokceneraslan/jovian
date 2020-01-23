@@ -141,7 +141,7 @@ adata
 # %%
 # %%time
 
-sc.pp.highly_variable_genes(adata, n_top_genes=par_downstream_n_top_genes)
+sc.pp.highly_variable_genes(adata, n_top_genes=par_downstream_n_top_genes, batch_key=par_downstream_hvg_batch_key)
 n_pcs = min(min(adata.n_obs, adata.n_vars)-1, par_downstream_n_pcs)
 sc.pp.pca(adata, n_comps=n_pcs, svd_solver='arpack')
 sc.pp.neighbors(adata, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
