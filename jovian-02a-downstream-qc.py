@@ -298,7 +298,7 @@ for sample, ad in tqdm(list(conf_samples.items())):
     plt.subplots_adjust(wspace=0.5)
 
     sc.pl.violin(ad, keys='log10_n_umis', groupby='sample_name', rotation=90, ax=ax[2], show=False)
-    sc.pl.violin(ad, keys='log10_n_umis', groupby='sample_name', rotation=90, ax=ax[3], show=False)
+    sc.pl.violin(ad, keys='log10_n_genes', groupby='sample_name', rotation=90, ax=ax[3], show=False)
 
     f, ax = plt.subplots(figsize=(10, 10))
     sc.pl.umap(ad, color='leiden', legend_loc='on data', legend_fontoutline=3, legend_fontsize=14, legend_fontweight='normal', title='Clusters', ax=ax, show=False)
