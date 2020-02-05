@@ -36,6 +36,7 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
     'r-biocmanager' \
     'r-seurat=3.0.2' \
     'r-huge=1.3*' \
+    'r-rgl=0.100*' \
     'r-psych=1.8*' \
     'rpy2=3.1*' \
     pytorch=1.3* cpuonly \
@@ -48,7 +49,7 @@ ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 # Install R packages
 RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'install.packages(c("bootnet", "lme4"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("bootnet", "lme4", "DirichletReg"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
 
