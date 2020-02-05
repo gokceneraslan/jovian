@@ -103,6 +103,9 @@ for sample, ad in conf_samples_processed.items():
 batch_categories, ads = zip(*conf_samples_processed.items())
 
 adata = sc.AnnData.concatenate(*ads, join=par_merge_type, batch_key=par_batch_key, batch_categories=batch_categories)
+if 'X_diffmap' in adata.obsm_keys():
+    # workaround for https://github.com/theislab/scanpy/issues/1021
+    del adata.obsm['X_diffmap]
 del conf_samples_processed
 
 adata
