@@ -7,8 +7,9 @@ popd
 output_folder='outputs/notebooks'
 input_folder='inputs/notebooks'
 reports_folder='outputs/reports'
+anndata_folder='outputs/anndata'
 
-mkdir -p $output_folder $input_folder $reports_folder
+mkdir -p $output_folder $input_folder $reports_folder $anndata_folder
 
 for pyfile in jovian-01-upstream-qc.py jovian-02a-downstream-qc.py jovian-02b-downstream-integrated.py jovian-03-DE.py; do
     ipynbfile=${pyfile/.py/.ipynb}
