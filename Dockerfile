@@ -49,7 +49,7 @@ ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 # Install R packages
 RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'install.packages(c("bootnet", "lme4", "DirichletReg"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("bootnet", "lme4", "DirichletReg", "ggpubr"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
 
