@@ -167,7 +167,8 @@ adata.obs.head()
 # ## Percent mito UMI
 
 # %%
-f, ax = plt.subplots(1, 4, figsize=(20, 4))
+f, ax = plt.subplots(2, 2, figsize=(20, 20))
+ax = ax.flatten()
 sc.pl.scatter(adata,
               x='n_umis',
               y='n_genes',
