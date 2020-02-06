@@ -272,7 +272,7 @@ sc.pl.umap(adata, color=['predicted_cell_types_coarse',
 
 # %%
 # %%time
-sc.tl.draw_graph(adata)
+#sc.tl.draw_graph(adata)
 
 # %%
 plt.rcParams['figure.figsize'] = (7, 7)
