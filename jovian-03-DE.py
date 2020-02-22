@@ -275,9 +275,9 @@ sc.pl.umap(adata, color=['predicted_cell_types_coarse',
 #sc.tl.draw_graph(adata)
 
 # %%
-plt.rcParams['figure.figsize'] = (7, 7)
-sc.pl.draw_graph(adata, color=['predicted_cell_types_coarse',
-                               'predicted_cell_types'], ncols=1, legend_loc='on data', legend_fontsize=7, legend_fontweight='normal', legend_fontoutline=2);
+#plt.rcParams['figure.figsize'] = (7, 7)
+#sc.pl.draw_graph(adata, color=['predicted_cell_types_coarse',
+#                               'predicted_cell_types'], ncols=1, legend_loc='on data', legend_fontsize=7, legend_fontweight='normal', legend_fontoutline=2);
 
 # %%
 adata.write(par_save_filename)
