@@ -12,6 +12,8 @@ RUN apt-get update && \
 
 USER $NB_UID
 
+RUN conda install --quiet --yes conda=4.8.3
+
 # Install R and python packages through conda-forge
 RUN conda install --quiet --yes -c bioconda -c pytorch \
     plotly \
