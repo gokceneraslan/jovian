@@ -24,9 +24,7 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
     leidenalg \
     louvain \
     jupytext \
-    phantomjs \
     hvplot \
-    selenium \
     'r-base=3.6.1' \
     'r-devtools=2.2*' \
     'r-irkernel=1.0*' \
@@ -49,7 +47,7 @@ ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 # Install R packages
 RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'install.packages(c("bootnet", "lme4", "DirichletReg", "ggpubr"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("lme4", "DirichletReg", "ggpubr"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
 
