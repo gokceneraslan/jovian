@@ -37,7 +37,6 @@ RUN conda install --quiet --yes -c bioconda -c pytorch \
     'r-seurat=3.0.2' \
     'r-huge=1.3*' \
     'r-rgl=0.100*' \
-    'r-psych=1.8*' \
     'rpy2=3.1*' \
     pytorch=1.3* cpuonly \
     torchvision && \
