@@ -43,7 +43,7 @@ RUN conda install --quiet --yes \
     'r-rgl=0.100*'
     
 RUN conda install --quiet --yes -c pytorch \
-    pytorch=1.5* cpuonly \
+    'pytorch=1.5*' cpuonly \
     torchvision && \
     conda clean --all -f -y
 
