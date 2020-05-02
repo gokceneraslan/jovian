@@ -14,31 +14,36 @@ USER $NB_UID
 
 RUN conda install --quiet --yes conda=4.8.3
 
+RUN conda config --add channels defaults && \
+    conda config --add channels bioconda && \
+    conda config --add channels conda-forge
+
 # Install R and python packages through conda-forge
-RUN conda install --quiet --yes -c bioconda -c pytorch \
+RUN conda install --quiet --yes \
     plotly \
     plotnine \
     seaborn \
     'pytables=3.6*' \
-    'numba=0.46*' \
-    'python-igraph=0.7*' \
-    graph-tool \
+    'numba=0.48*' \
+    python-igraph \
     leidenalg \
     louvain \
     jupytext \
-    hvplot \
-    'r-base=3.6.1' \
-    'r-devtools=2.2*' \
-    'r-irkernel=1.0*' \
+    graph-tool \
+    hvplot
+
+RUN conda install --quiet --yes \
+    'r-base=3.6*' \
+    'r-devtools=2.3*' \
     'r-plyr=1.8*' \
-    'r-ggplot2=3.2*' \
+    'r-ggplot2=3.3*' \
     'r-rcurl=1.95*' \
     'r-biocmanager' \
     'r-seurat=3.0.2' \
-    'r-huge=1.3*' \
-    'r-rgl=0.100*' \
-    'rpy2=3.1*' \
-    pytorch=1.3* cpuonly \
+    'r-rgl=0.100*'
+    
+RUN conda install --quiet --yes -c pytorch \
+    pytorch=1.5* cpuonly \
     torchvision && \
     conda clean --all -f -y
 
@@ -48,7 +53,7 @@ ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 # Install R packages
 RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'install.packages(c("lme4", "DirichletReg", "ggpubr"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("lme4", "DirichletReg", "ggpubr", "IRkernel"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
 
@@ -56,7 +61,7 @@ RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "
 RUN pip install git+https://github.com/theislab/scanpy.git && \
     pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot \
                 openpyxl scvi cellxgene skggm pyannotables  \
-                papermill && \
+                papermill rpy2 && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     pip install git+https://github.com/broadinstitute/CellBender.git && \
     fix-permissions $CONDA_DIR && \
