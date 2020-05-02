@@ -12,6 +12,7 @@ RUN apt-get update && \
 
 USER $NB_UID
 
+# to avoid https://github.com/conda/conda/issues/9681
 RUN conda install --quiet --yes conda=4.8.3
 
 RUN conda config --add channels defaults && \
@@ -70,6 +71,9 @@ RUN pip install git+https://github.com/theislab/scanpy.git && \
 RUN ipython profile create && \
     echo "c.InlineBackend.figure_format = 'retina'" >> ~/.ipython/profile_default/ipython_kernel_config.py && \
     echo "c.InteractiveShell.cache_size = 0" >> ~/.ipython/profile_default/ipython_kernel_config.py
+
+RUN jupyter labextension install @jupyterlab/toc \
+    && fix-permissions /home/$NB_USER
 
 USER root
 
