@@ -39,7 +39,7 @@ RUN conda install --quiet --yes \
     'r-ggplot2=3.3*' \
     'r-rcurl=1.95*' \
     'r-biocmanager' \
-    'r-seurat=3.0.2' \
+    'r-seurat=3.1.5' \
     'r-rgl=0.100*'
     
 RUN conda install --quiet --yes -c pytorch \
