@@ -62,7 +62,7 @@ RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "
 RUN pip install git+https://github.com/theislab/scanpy.git && \
     pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot \
                 openpyxl scvi cellxgene skggm pyannotables  \
-                papermill rpy2 && \
+                papermill rpy2 harmony-pytorch && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     pip install git+https://github.com/broadinstitute/CellBender.git && \
     fix-permissions $CONDA_DIR && \
