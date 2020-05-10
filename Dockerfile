@@ -59,7 +59,7 @@ RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "
  && fix-permissions /home/$NB_USER
  
 RUN R -e 'install.packages(c("Formula", "maxLik"))' \
- && R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/DirichletReg/DirichletReg_0.6-3.1.tar.gz")'
+ && R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/DirichletReg/DirichletReg_0.6-3.1.tar.gz", repos = NULL, type = "source")'
 
 # Install python3 packages
 RUN pip install git+https://github.com/theislab/scanpy.git && \
