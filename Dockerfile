@@ -58,7 +58,7 @@ RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
  
-RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-project.org"))' \
+RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-project.org")' \
  && R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/DirichletReg/DirichletReg_0.6-3.1.tar.gz", repos = NULL, type = "source")'
 
 # Install python3 packages
