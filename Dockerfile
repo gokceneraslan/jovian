@@ -62,7 +62,7 @@ RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-pro
  && R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/DirichletReg/DirichletReg_0.6-3.1.tar.gz", repos = NULL, type = "source")'
 
 # Install python3 packages
-RUN pip install git+https://github.com/theislab/scanpy.git && \
+RUN pip install scanpy anndata -U && \
     pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot \
                 openpyxl scvi cellxgene skggm pyannotables  \
                 papermill rpy2 harmony-pytorch && \
