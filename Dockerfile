@@ -68,6 +68,7 @@ RUN pip install scanpy anndata -U && \
                 papermill rpy2 harmony-pytorch && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     pip install git+https://github.com/broadinstitute/CellBender.git && \
+    pip install black -U && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
