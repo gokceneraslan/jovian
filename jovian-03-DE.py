@@ -128,6 +128,9 @@ def predict_cell_types(adata,
                        uns_out_key='cell_type_prediction',
                        **kwds):
 
+    (Path.home() / '.cache' / 'ExperimentHub').mkdir(parents=True, exist_ok=True)
+    #r('ExperimentHub::setExperimentHubOption("ASK", FALSE)')
+
     r('BiocParallel::register(BiocParallel::SerialParam())')
     s = importr('SingleR')
 

@@ -150,7 +150,7 @@ sc.pp.pca(adata, n_comps=n_pcs, svd_solver='arpack')
 sc.pp.neighbors(adata, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
 sc.tl.umap(adata)
 sc.tl.leiden(adata, resolution=par_downstream_louvain_resolution)
-sc.tl.diffmap(adata)
+#sc.tl.diffmap(adata)
 
 adata
 
@@ -253,7 +253,7 @@ if par_remove_doublets:
     sc.pp.neighbors(adata, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
     sc.tl.umap(adata)
     sc.tl.leiden(adata, resolution=par_downstream_louvain_resolution)
-    sc.tl.diffmap(adata)
+    #sc.tl.diffmap(adata)
 
     f, ax = plt.subplots(figsize=(10, 10))
     sc.pl.umap(adata, color='leiden', legend_loc='on data', legend_fontoutline=3, legend_fontsize=14, legend_fontweight='normal', title='Clusters', ax=ax, show=False);
@@ -303,7 +303,7 @@ if par_generate_plots_per_group:
         sc.pp.neighbors(ad, n_neighbors=par_downstream_n_neighbors, metric=par_downstream_neighbor_metric)
         sc.tl.umap(ad)
         sc.tl.leiden(ad, resolution=par_downstream_louvain_resolution)
-        sc.tl.diffmap(ad)
+        #sc.tl.diffmap(ad)
 
         ##### Visualize
         f, ax = plt.subplots(1, 4, figsize=(20, 4))
