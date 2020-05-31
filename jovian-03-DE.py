@@ -183,8 +183,9 @@ def predict_cell_types(adata,
     for cluster in adata.obs[cluster_key].cat.categories:
         adata.obs.loc[adata.obs[cluster_key] == cluster, obs_out_key] = labels.loc[cluster]['pruned.labels']
 
-    adata.uns[uns_out_key] = labels['pruned.labels'].to_dict()
-
+    # store explicitly as str to avoid NA_Character_ bugs
+    adata.uns[uns_out_key] = {str(k): str(v) for k,v in labels['pruned.labels'].to_dict().items()}
+    
 # %% [markdown]
 # ## Save markers
 
