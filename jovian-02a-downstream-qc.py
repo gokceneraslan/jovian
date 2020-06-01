@@ -130,8 +130,8 @@ import scrublet as scr
 
 def run_scrublet(ad):
     scrub = scr.Scrublet(ad.X)
-    n_prin_comps = min(min(ad.X.shape[0], ad.X.shape[1]), 30)
-    doublet_scores, predicted_doublets = scrub.scrub_doublets(verbose=False, n_prin_comps=n_prin_comps)
+    n_prin_comps = min(min(ad.shape[0], ad.shape[1]), 30)
+    doublet_scores, predicted_doublets = scrub.scrub_doublets(verbose=False, n_prin_comps=n_prin_comps, min_counts=1, min_cells=0)
 
     ad.obs['scrublet'] = predicted_doublets
     ad.obs['scrublet_score'] = doublet_scores
