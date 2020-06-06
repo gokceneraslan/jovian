@@ -7,7 +7,7 @@ USER root
 
 # Ubuntu packages needed for R and Python packages
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg cmake libigraph-dev && \
+    apt-get install -y --no-install-recommends ffmpeg cmake less libigraph-dev && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
