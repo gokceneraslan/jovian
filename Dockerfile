@@ -40,6 +40,7 @@ RUN conda install --quiet --yes \
     louvain \
     jupytext \
     graph-tool \
+    scikit-allel \
     hvplot
 
 RUN conda install --quiet --yes \
