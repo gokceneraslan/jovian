@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg cmake less libigraph-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y wget build-essential curl libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev git unzip && \
+RUN apt-get install -y wget build-essential git unzip && \
     apt-get install --no-install-recommends -y lsb-release gnupg && \
     export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
