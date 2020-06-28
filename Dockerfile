@@ -10,6 +10,15 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg cmake less libigraph-dev && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get install -y wget build-essential curl libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev git unzip && \
+    apt-get install --no-install-recommends -y lsb-release gnupg && \
+    export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    apt-get update && apt-get install -y google-cloud-sdk=290.0.0-0 && \
+    apt-get -qq -y autoremove && \
+    apt-get clean
+
 USER $NB_UID
 
 # to avoid https://github.com/conda/conda/issues/9681
