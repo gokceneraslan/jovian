@@ -8,11 +8,10 @@ USER root
 # Ubuntu packages needed for R and Python packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg cmake less libigraph-dev \
-    wget build-essential git unzip lsb-release curl gnupg
+    wget build-essential git unzip lsb-release curl gnupg apt-transport-https ca-certificates
 
-RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
     apt-get update && apt-get install -y google-cloud-sdk=290.0.0-0 && \
     apt-get -qq -y autoremove && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
