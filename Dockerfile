@@ -72,7 +72,7 @@ RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-pro
 RUN pip install scanpy anndata -U && \
     pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot \
                 openpyxl scvi cellxgene skggm pyannotables  \
-                papermill rpy2 harmony-pytorch && \
+                papermill rpy2 harmony-pytorch adjustText && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     pip install git+https://github.com/broadinstitute/CellBender.git && \
     pip install black -U && \
