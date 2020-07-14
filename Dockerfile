@@ -61,12 +61,12 @@ ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 # Install R packages
 RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'install.packages(c("lme4", "ggpubr", "IRkernel"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("lme4", "ggpubr", "IRkernel", "DirichletReg", "lmerTest"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
  
-RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-project.org")' \
- && R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/DirichletReg/DirichletReg_0.6-3.1.tar.gz", repos = NULL, type = "source")'
+RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-project.org")'
+# && R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/DirichletReg/DirichletReg_0.6-3.1.tar.gz", repos = NULL, type = "source")'
 
 # Install python3 packages
 RUN pip install scanpy anndata -U && \
