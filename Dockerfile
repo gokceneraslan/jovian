@@ -38,6 +38,7 @@ RUN conda install --quiet --yes \
     jupytext \
     graph-tool \
     scikit-allel \
+    'python-language-server[all]' \
     hvplot
 
 RUN conda install --quiet --yes \
@@ -73,7 +74,6 @@ RUN pip install scanpy anndata -U && \
     pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot jupyter-lsp \
                 openpyxl scvi cellxgene skggm pyannotables sparse==0.9.1 \
                 papermill rpy2 harmony-pytorch adjustText diffxpy \
-                python-language-server[all] && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     pip install git+https://github.com/broadinstitute/CellBender.git && \
     pip install black -U && \
