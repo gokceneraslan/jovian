@@ -59,9 +59,9 @@ ENV TAR=/bin/tar
 ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 
 # Install R packages
-RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest", "languageserver"))' \
+RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
- && R -e 'install.packages(c("lme4", "ggpubr", "IRkernel", "DirichletReg", "lmerTest"), repos = "http://cran.us.r-project.org")' \
+ && R -e 'install.packages(c("lme4", "ggpubr", "IRkernel", "DirichletReg", "lmerTest", "languageserver"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
  && fix-permissions /home/$NB_USER
  
