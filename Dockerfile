@@ -59,7 +59,7 @@ ENV TAR=/bin/tar
 ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS="true"
 
 # Install R packages
-RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest"))' \
+RUN R -e 'BiocManager::install(c("SingleR", "DropletUtils", "scater", "scran", "scRNAseq", "MAST", "multtest", "languageserver"))' \
  && R -e 'devtools::install_github("constantAmateur/SoupX", upgrade=F)' \
  && R -e 'install.packages(c("lme4", "ggpubr", "IRkernel", "DirichletReg", "lmerTest"), repos = "http://cran.us.r-project.org")' \
  && R -e 'IRkernel::installspec()' \
@@ -70,9 +70,10 @@ RUN R -e 'install.packages(c("Formula", "maxLik"), repos = "http://cran.us.r-pro
 
 # Install python3 packages
 RUN pip install scanpy anndata -U && \
-    pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot \
+    pip install scvelo scrublet fa2 mnnpy MulticoreTSNE scplot jupyter-lsp \
                 openpyxl scvi cellxgene skggm pyannotables sparse==0.9.1 \
-                papermill rpy2 harmony-pytorch adjustText diffxpy && \
+                papermill rpy2 harmony-pytorch adjustText diffxpy \
+                python-language-server[all] && \
     pip install git+https://github.com/flying-sheep/anndata2ri.git && \
     pip install git+https://github.com/broadinstitute/CellBender.git && \
     pip install black -U && \
@@ -84,6 +85,9 @@ RUN ipython profile create && \
     echo "c.InteractiveShell.cache_size = 0" >> ~/.ipython/profile_default/ipython_kernel_config.py
 
 RUN jupyter labextension install @jupyterlab/toc \
+    && fix-permissions /home/$NB_USER
+
+RUN jupyter labextension install @krassowski/jupyterlab-lsp \
     && fix-permissions /home/$NB_USER
 
 USER root
