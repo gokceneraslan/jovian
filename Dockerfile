@@ -32,7 +32,7 @@ RUN conda install --quiet --yes \
     seaborn \
     'pytables=3.6*' \
     'numba=0.48*' \
-    python-igraph \
+    'python-igraph=0.8*' \
     leidenalg \
     louvain \
     jupytext \
@@ -80,6 +80,8 @@ RUN pip install scanpy anndata -U && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
+RUN conda install --quiet --yes 'python-igraph=0.8*'
+
 RUN ipython profile create && \
     echo "c.InlineBackend.figure_format = 'retina'" >> ~/.ipython/profile_default/ipython_kernel_config.py && \
     echo "c.InteractiveShell.cache_size = 0" >> ~/.ipython/profile_default/ipython_kernel_config.py
@@ -87,8 +89,9 @@ RUN ipython profile create && \
 RUN jupyter labextension install @jupyterlab/toc \
     && fix-permissions /home/$NB_USER
 
-RUN jupyter labextension install @krassowski/jupyterlab-lsp \
-    && fix-permissions /home/$NB_USER
+# not stable for big notebooks yet
+#RUN jupyter labextension install @krassowski/jupyterlab-lsp \
+#    && fix-permissions /home/$NB_USER
 
 USER root
 
