@@ -129,7 +129,7 @@ for k, ad in tqdm(list(conf_samples.items())):
 import scrublet as scr
 
 def run_scrublet(ad):
-    scrub = scr.Scrublet(ad.X)
+    scrub = scr.Scrublet(ad.X.copy())
     n_prin_comps = min(min(ad.shape[0], ad.shape[1]), 50)
     doublet_scores, predicted_doublets = scrub.scrub_doublets(verbose=False, n_prin_comps=n_prin_comps, min_counts=1, min_cells=0, log_transform=True)
 
